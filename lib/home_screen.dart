@@ -22,23 +22,12 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-         Center(
-           child: TextButton(
-               onPressed: (){
-                 // Get.to(ScreenOne(name: "shayan",));
-                 Get.toNamed("/screenOne", arguments: [
-                   " Shayan",
-                   "Asif"
-                 ]);
-               },
-               child: Text("Go to next screen"),
-           ),
-         ),
-        ],
+      body: Container(
+        height: Get.height * 0.3,
+        width: Get.width * 0.8,
+        color: Colors.red,
+        child: Center(
+            child: Text("Center")),
       ),
 
 
