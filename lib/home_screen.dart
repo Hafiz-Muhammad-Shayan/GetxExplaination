@@ -33,8 +33,64 @@ class _HomeScreenState extends State<HomeScreen> {
                   titlePadding: EdgeInsets.only(top: 20),
                   contentPadding: EdgeInsets.all(20),
                   middleText: "Are you sure you want to delete this chat",
-                  textConfirm: "Yes",
-                  textCancel: "No",
+                  // textConfirm: "Yes",
+                  // textCancel: "No",
+                  
+                  confirm: TextButton(
+                      onPressed: (){
+                        Get.back();
+                      },
+                      child: Text(
+                          "Ok",
+                        style: TextStyle(
+                          color: Colors.blue,
+                        ),
+                      )),
+                  
+                  cancel: TextButton(
+                      onPressed: (){}, 
+                      child: Text(
+                          "Cancel",
+                        style: TextStyle(
+                          color: Colors.blue,
+                        ),
+                      )),
+                  
+                );
+              },
+            ),
+          ),
+          Card(
+            child: ListTile(
+              title: Text("Getx Bottom sheet"),
+              subtitle: Text("Getx Dialog Alert twith getx"),
+              onTap: () {
+                Get.bottomSheet(
+                  Container(
+
+                    decoration: BoxDecoration(
+                        color: Colors.red,
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: Column(
+                      children: [
+                        ListTile(
+                          leading: Icon(Icons.light_mode),
+                          title: Text("Light Theme"),
+                          onTap: (){
+                          Get.changeTheme(ThemeData.light());
+                          },
+                        ),
+                        ListTile(
+                          leading: Icon(Icons.dark_mode),
+                          title: Text("Dark Theme"),
+                          onTap: (){
+                            Get.changeTheme(ThemeData.dark());
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
                 );
               },
             ),
@@ -51,6 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
               snackPosition: SnackPosition.BOTTOM,
             );
           }),
+
 
     );
   }
