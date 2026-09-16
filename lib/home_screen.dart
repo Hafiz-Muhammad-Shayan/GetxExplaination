@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:getxexplaination/screen_one.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -22,12 +23,37 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),),
       ),
-      body: Container(
-        height: Get.height * 0.3,
-        width: Get.width * 0.8,
-        color: Colors.red,
-        child: Center(
-            child: Text("Center")),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+
+        children: [
+          ListTile(
+            title: Text("message".tr),
+            subtitle: Text("name".tr),
+          ),
+          SizedBox(
+            height: 50,
+          ),
+          Row(
+            children: [
+              OutlinedButton(
+                  onPressed: (){
+                    Get.updateLocale(Locale("en","US"));
+                  },
+                  child: Text('English')),
+              SizedBox(
+                width: 20,
+              ),
+              OutlinedButton(
+                  onPressed: (){
+                    Get.updateLocale(Locale("ur","PK"));
+                  },
+                  child: Text('Urdu')),
+
+            ],
+          )
+        ],
       ),
 
 
