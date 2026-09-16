@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:getxexplaination/counter_controller.dart';
+import 'package:getxexplaination/example_two.dart';
 import 'package:getxexplaination/screen_one.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -12,8 +13,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final CounterController controller = Get.put(CounterController());
-
+  ExampleTwoController exampleTwoController = Get.put(ExampleTwoController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,20 +27,19 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),),
       ),
-      body: Center(
-        child: Obx((){
-          return Text(
-            controller.counter.toString(),
-            style: TextStyle(
-              fontSize: 60,
-            ),);
-        }),
+      body: Column(
+        children: [
+          Obx(() => Container(
+            width: 200,
+            height: 200,
+            color: Colors.red.withOpacity(exampleTwoController.opacity.value),
+          ),),
+          Obx(() =>  Slider(value: exampleTwoController.opacity.value, onChanged: (value){
+            exampleTwoController.setOpacity(value);
+          }),),
+        ],
       ),
 
-      floatingActionButton: FloatingActionButton(
-          onPressed: (){
-          controller.incrementCounter();
-          }),
     );
   }
 }
