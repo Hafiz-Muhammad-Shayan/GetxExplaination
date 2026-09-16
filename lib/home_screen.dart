@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:getxexplaination/counter_controller.dart';
+import 'package:getxexplaination/example_three.dart';
 import 'package:getxexplaination/example_two.dart';
 import 'package:getxexplaination/screen_one.dart';
 
@@ -13,7 +14,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  ExampleTwoController exampleTwoController = Get.put(ExampleTwoController());
+  ExampleThreeController exampleThreeController = Get.put(ExampleThreeController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,14 +30,20 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Column(
         children: [
-          Obx(() => Container(
-            width: 200,
-            height: 200,
-            color: Colors.red.withOpacity(exampleTwoController.opacity.value),
-          ),),
-          Obx(() =>  Slider(value: exampleTwoController.opacity.value, onChanged: (value){
-            exampleTwoController.setOpacity(value);
-          }),),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text("Notifications"),
+              Obx(()=>Switch(
+                  value: exampleThreeController.Notification.value,
+                  onChanged: (value){
+                    exampleThreeController.setNotification(value);
+
+
+                  }),
+              ),
+            ],
+          ),
         ],
       ),
 
