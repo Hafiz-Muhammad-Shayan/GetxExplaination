@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
@@ -5,6 +7,7 @@ import 'package:getxexplaination/counter_controller.dart';
 import 'package:getxexplaination/example_three.dart';
 import 'package:getxexplaination/example_two.dart';
 import 'package:getxexplaination/favorateClass.dart';
+import 'package:getxexplaination/image_picker_controller.dart';
 import 'package:getxexplaination/screen_one.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -15,7 +18,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  FavorateclassController controller = Get.put(FavorateclassController());
+  ImagePickerController controller = Get.put(ImagePickerController());
   @override
   Widget build(BuildContext context) {
 
@@ -30,29 +33,28 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),),
       ),
-      body: ListView.builder(
-        itemCount: controller.fruitList.length,
-          itemBuilder: (context, index) {
-            return Card(
-              child: ListTile(
-                onTap: () {
-                  if(controller.temFruitList.contains(controller.fruitList[index])){
-                    controller.removeFromFavorate(controller.fruitList[index].toString());
-                  }
-                  else{
-                    controller.addToFavorate(controller.fruitList[index].toString());
-
-                  }
-
-                },
-                title: Text(controller.fruitList[index].toString()),
-                trailing: Obx(() => Icon(
-                  Icons.favorite,
-                  color:controller.temFruitList.contains(controller.fruitList[index]) ? Colors.white : Colors.red,)),
+      body: Obx(() {
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Center(
+              child: CircleAvatar(
+                radius: 40,
+                backgroundImage: controller.imagePath.isNotEmpty ?
+                FileImage(File(controller.imagePath.toString())) :
+                null,
               ),
-            );
-          },
-      ),
+            ),
+
+            TextButton(
+                onPressed: (){
+                  controller.getImage();
+                },
+                child: Text("Pick Image")),
+          ],
+        );
+      } ),
 
     );
   }
