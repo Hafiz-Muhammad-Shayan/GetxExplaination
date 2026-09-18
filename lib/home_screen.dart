@@ -8,6 +8,7 @@ import 'package:getxexplaination/example_three.dart';
 import 'package:getxexplaination/example_two.dart';
 import 'package:getxexplaination/favorateClass.dart';
 import 'package:getxexplaination/image_picker_controller.dart';
+import 'package:getxexplaination/login_conroller.dart';
 import 'package:getxexplaination/screen_one.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -18,7 +19,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  ImagePickerController controller = Get.put(ImagePickerController());
+    LoginConroller conroller = LoginConroller();
+
   @override
   Widget build(BuildContext context) {
 
@@ -33,28 +35,44 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),),
       ),
-      body: Obx(() {
-        return Column(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Center(
-              child: CircleAvatar(
-                radius: 40,
-                backgroundImage: controller.imagePath.isNotEmpty ?
-                FileImage(File(controller.imagePath.toString())) :
-                null,
+            TextFormField(
+              controller: conroller.emailController.value,
+              decoration: InputDecoration(
+                hintText: "Email",
               ),
             ),
-
-            TextButton(
-                onPressed: (){
-                  controller.getImage();
+            TextFormField(
+              controller: conroller.passwordController.value,
+              decoration: InputDecoration(
+                hintText: "password",
+              ),
+            ),
+            SizedBox(
+              height: 50,
+            ),
+            Obx((){
+              return InkWell(
+                onTap: (){
+                  conroller.LoginApi();
                 },
-                child: Text("Pick Image")),
+                child: conroller.loading.value ? CircularProgressIndicator() : Container(
+                  height: 45,
+                  color: Colors.grey,
+                  child: Center(
+                    child: Text("Login"),
+                  ),
+                ),
+              );
+            }),
           ],
-        );
-      } ),
+        ),
+      ),
 
     );
   }
